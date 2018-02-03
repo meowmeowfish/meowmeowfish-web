@@ -10,9 +10,9 @@
   <table>
     <thead>
       <tr>
+        <th>Index</th>
         <th>Latitude</th>
         <th>Longitude</th>
-        <th>Address</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -20,9 +20,9 @@
     <tbody>
       <% @gmaps.each do |gmap| %>
         <tr>
+          <td><%= gmap.index %></td>
           <td><%= gmap.latitude %></td>
           <td><%= gmap.longitude %></td>
-          <td><%= gmap.address %></td>
           <td><%= link_to 'Show', gmap %></td>
           <td><%= link_to 'Edit', edit_gmap_path(gmap) %></td>
           <td><%= link_to 'Destroy', gmap, method: :delete, data: { confirm: 'Are you sure?' } %></td>

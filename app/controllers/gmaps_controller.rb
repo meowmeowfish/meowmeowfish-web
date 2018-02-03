@@ -42,13 +42,31 @@ class GmapsController < ApplicationController
     end
   end
 
-  # GET /gmaps/api/create/:id/:lat/:lon
+  # GET /gmaps/api/create/:index/:lat/:lon
   def api_create
-    @gmap = Gmap.new(:latitude => params[:lat], :longitude => params[:lon])
+    @gmap = Gmap.new(:index => params[:index], :latitude => params[:lat], :longitude => params[:lon])
     
     respond_to do |format|
       if @gmap.save
         format.html { redirect_to @gmap, notice: 'Gmap was successfully created.' }
+        format.json { render :show, status: :created, location: @gmap }
+      else
+        format.html { render :new }
+        format.json { render json: @gmap.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  # GET /gmaps/api/update/:index/:lat/:lon
+  def api_update
+    @gmap = Gmap.where(:index => params[:index]).first
+    @gmap.latitude = params[:lat]
+    @gmap.longitude = params[:lon]
+
+    respond_to do |format|
+      if @gmap.save
+        format.html { redirect_to @gmap, notice: 'Gmap was successfully updated.' }
         format.json { render :show, status: :created, location: @gmap }
       else
         format.html { render :new }
