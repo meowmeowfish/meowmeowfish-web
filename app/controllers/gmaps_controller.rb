@@ -42,6 +42,21 @@ class GmapsController < ApplicationController
     end
   end
 
+  # GET /gmaps/api/create/:id/:lat/:lon
+  def api_create
+    @gmap = Gmap.new(:latitude => params[:lat], :longitude => params[:lon])
+    
+    respond_to do |format|
+      if @gmap.save
+        format.html { redirect_to @gmap, notice: 'Gmap was successfully created.' }
+        format.json { render :show, status: :created, location: @gmap }
+      else
+        format.html { render :new }
+        format.json { render json: @gmap.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /gmaps/1
   # PATCH/PUT /gmaps/1.json
   def update
