@@ -23,7 +23,7 @@ body {
 	position: absolute;
 	top: 7vh;
 	left: 20%;
-	width: 60%;
+	width: 80%;
 	height: 93vh;
 }
 
@@ -69,4 +69,13 @@ body {
 	width: 80%;
 	left: 20%;
 	height: 7vh;
+}
+
+.the-device {
+	color: #ddd;
+}
+
+.the-device:hover {
+	background-color: rgb(40,50,90);
+	color: white;
 }

@@ -36,11 +36,13 @@
       </strong>
     </div>
     <% @gmaps.each do |gmap| %>
-      <div class="row">
-        <div class="col-md-3"><%= gmap.index %></div>
-        <div class="col-md-4"><%= gmap.latitude %></div>
-        <div class="col-md-5"><%= gmap.longitude %></div>
-      </div>
+      <%= link_to edit_gmap_path(gmap) do %>
+        <div class="row the-device">
+          <div class="col-md-3"><%= gmap.index %></div>
+          <div class="col-md-4"><%= gmap.latitude %></div>
+          <div class="col-md-5"><%= gmap.longitude %></div>
+        </div>
+      <% end %>
     <% end %>
     <br>
     <%= link_to new_gmap_path do %>
@@ -53,7 +55,7 @@
 
 <!-- <div id="map-topbar"></div> -->
 
-<div class='sidebar' id="sidebar-right">
+<!-- <div class='sidebar' id="sidebar-right">
   <div class="container-fluid">
     <h2>Selected device:</h2>
     <div class="row">
@@ -68,7 +70,7 @@
         <div class="col-md-5"><strong>Longitude: </strong></div>
         <div class="col-md-7"><span id='lon-val'>0.0</span></div>
     </div>
-</div>
+</div> -->
 
 <script type="text/javascript">
   $(document).ready(function()
