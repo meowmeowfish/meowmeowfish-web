@@ -55,7 +55,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 # User custom
+gem "jquery-rails"
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'gmaps4rails'
 gem 'geocoder'
+
 

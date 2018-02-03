@@ -9,6 +9,7 @@ class GmapsController < ApplicationController
        marker.lat gmap.latitude
        marker.lng gmap.longitude
        marker.infowindow "ID: #{gmap.index}<br/>Lat.: #{gmap.latitude}<br/>Lon.: #{gmap.longitude}"
+       # marker.myindex gmap.index
      end
   end
 

@@ -54,20 +54,56 @@
 <!-- <div id="map-topbar"></div> -->
 
 <div class='sidebar' id="sidebar-right">
+  <div class="container-fluid">
+    <h2>Selected device:</h2>
+    <div class="row">
+        <div class="col-md-5"><strong>Index: </strong></div>
+        <div class="col-md-7"><span id='index-val'>0</span></div>
+    </div>
+    <div class="row">
+        <div class="col-md-5"><strong>Latitude: </strong></div>
+        <div class="col-md-7"><span id='lat-val'>0.0</span></div>
+    </div>
+    <div class="row">
+        <div class="col-md-5"><strong>Longitude: </strong></div>
+        <div class="col-md-7"><span id='lon-val'>0.0</span></div>
+    </div>
 </div>
 
 <script type="text/javascript">
+  $(document).ready(function()
+  {
+    var mapStyle = [{"featureType":"landscape","stylers":[{"hue":"#FFA800"},{"saturation":0},{"lightness":0},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#53FF00"},{"saturation":-73},{"lightness":40},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FBFF00"},{"saturation":0},{"lightness":0},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#00FFFD"},{"saturation":0},{"lightness":30},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#00BFFF"},{"saturation":6},{"lightness":8},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#679714"},{"saturation":33.4},{"lightness":-25.4},{"gamma":1}]}];
 
-  var mapStyle = [{"featureType":"landscape","stylers":[{"hue":"#FFA800"},{"saturation":0},{"lightness":0},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#53FF00"},{"saturation":-73},{"lightness":40},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FBFF00"},{"saturation":0},{"lightness":0},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#00FFFD"},{"saturation":0},{"lightness":30},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#00BFFF"},{"saturation":6},{"lightness":8},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#679714"},{"saturation":33.4},{"lightness":-25.4},{"gamma":1}]}];
+    var data = <%= raw @hash.to_json %>;
+    var markers = [];
 
-  handler = Gmaps.build('Google');
-  handler.buildMap({ 
-    provider: {
-      styles: mapStyle
-    },
-    internal: {id: 'map'}}, function(){
-      markers = handler.addMarkers(<%= raw @hash.to_json %>);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-    });
+    $('#index-val').html(data.length);
+    for (var i = 0; i < data.length; i++) {
+      marker = new google.maps.Marker(data[i]);
+
+      marker.addListener('click', function() {
+          alert("yoo");
+          // var idx = marker.myindex;
+          var lat = marker.latitude;
+          var lon = marker.longitude;
+          // $('#index-val').html(idx);
+          $('#lat-val').html(lat);
+          $('#lon-val').html(lon);
+          
+        });
+
+      markers.push(marker);
+    };
+
+    handler = Gmaps.build('Google');
+    handler.buildMap({ 
+      provider: {
+        styles: mapStyle
+      },
+      internal: {id: 'map'}}, function(){
+        handler.bounds.extendWith(handler.addMarkers(markers));
+        handler.fitMapToBounds();
+      });
+  });
 </script>
