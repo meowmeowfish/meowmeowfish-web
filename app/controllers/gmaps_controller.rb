@@ -8,8 +8,8 @@ class GmapsController < ApplicationController
      @hash = Gmaps4rails.build_markers(@gmaps) do |gmap, marker|
        marker.lat gmap.latitude
        marker.lng gmap.longitude
-       marker.infowindow gmap.address
-    end
+       marker.infowindow "ID: #{gmap.index}<br/>Lat.: #{gmap.latitude}<br/>Lon.: #{gmap.longitude}"
+     end
   end
 
   # GET /gmaps/1
