@@ -107,6 +107,6 @@ class GmapsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gmap_params
-      params.require(:gmap).permit(:latitude, :longitude, :address)
+      params.require(:gmap).permit(:index, :latitude, :longitude, :address)
     end
 end
