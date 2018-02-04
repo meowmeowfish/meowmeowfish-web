@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203153450) do
+ActiveRecord::Schema.define(version: 20180204030538) do
 
   create_table "gmaps", force: :cascade do |t|
     t.float "latitude"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20180203153450) do
     t.datetime "updated_at", null: false
     t.integer "index"
     t.boolean "ship_detected"
+    t.integer "status"
   end
 
 end

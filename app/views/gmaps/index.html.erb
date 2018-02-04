@@ -30,17 +30,29 @@
     <h3>Devices:</h3>
     <div class="row">
       <strong>
-        <div class="col-md-3">Index</div>
-        <div class="col-md-4">Lat.</div>
-        <div class="col-md-5">Lon.</div>
+        <div class="col-md-2">ID</div>
+        <div class="col-md-3">Lat.</div>
+        <div class="col-md-3">Lon.</div>
+        <div class="col-md-4">Status</div>
       </strong>
     </div>
     <% @gmaps.each do |gmap| %>
       <%= link_to edit_gmap_path(gmap) do %>
         <div class="row the-device">
-          <div class="col-md-3"><%= gmap.index %></div>
-          <div class="col-md-4"><%= gmap.latitude %></div>
-          <div class="col-md-5"><%= gmap.longitude %></div>
+          <div class="col-md-2"><%= gmap.index %></div>
+          <div class="col-md-3"><%= gmap.latitude %></div>
+          <div class="col-md-3"><%= gmap.longitude %></div>
+          <div class="col-md-4">
+            <% if gmap.status == 1 %>
+              <%= '-' %>
+            <% elsif gmap.status == 2 %>
+              <%= 'Whale detected' %>
+            <% elsif gmap.status == 3 %>
+              <%= 'Dolphin detected' %>
+            <% elsif gmap.status == 4 %>
+              <%= 'Ship detected' %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     <% end %>

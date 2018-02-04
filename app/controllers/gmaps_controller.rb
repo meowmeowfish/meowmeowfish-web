@@ -8,7 +8,7 @@ class GmapsController < ApplicationController
      @hash = Gmaps4rails.build_markers(@gmaps) do |gmap, marker|
        marker.lat gmap.latitude
        marker.lng gmap.longitude
-       marker.infowindow "<div style='font-size:16px;'>ID: #{gmap.index}<br/>Lat.: #{gmap.latitude}<br/>Lon.: #{gmap.longitude}<br/>Ship: #{gmap.ship_detected}</div>"
+       marker.infowindow "<div style='font-size:16px;'>ID: #{gmap.index}<br/>Lat.: #{gmap.latitude}<br/>Lon.: #{gmap.longitude}<br/>Status: #{gmap.status}</div>"
        # marker.myindex gmap.index
      end
   end
@@ -45,7 +45,7 @@ class GmapsController < ApplicationController
 
   # GET /gmaps/api/create/:index/:lat/:lon/:ship
   def api_create
-    @gmap = Gmap.new(:index => params[:index], :latitude => params[:lat], :longitude => params[:lon], :ship_detected => params[:ship])
+    @gmap = Gmap.new(:index => params[:index], :latitude => params[:lat], :longitude => params[:lon], :status => params[:status])
     
     respond_to do |format|
       if @gmap.save
@@ -64,7 +64,8 @@ class GmapsController < ApplicationController
     @gmap = Gmap.where(:index => params[:index]).first
     @gmap.latitude = params[:lat]
     @gmap.longitude = params[:lon]
-    @gmap.ship_detected = params[:ship]
+    #@gmap.ship_detected = params[:ship]
+    @gmap.status = params[:status]
 
     respond_to do |format|
       if @gmap.save
@@ -109,6 +110,6 @@ class GmapsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gmap_params
-      params.require(:gmap).permit(:index, :latitude, :longitude, :address, :ship_detected)
+      params.require(:gmap).permit(:index, :latitude, :longitude, :address, :status)
     end
 end
