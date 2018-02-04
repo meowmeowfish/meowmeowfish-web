@@ -1,24 +1,57 @@
-# README
+# MeowMeowFish website
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Our project demo website for Fishackathon Taipei 2018
 
-Things you may want to cover:
+Website screenshot:
+![](https://imgur.com/oXgDuKJ.png)
 
-* Ruby version
+Built using Ruby on Rails.
 
-* System dependencies
+Ruby version: 2.4.1
 
-* Configuration
+Rails version: 5.1.4
 
-* Database creation
+## To start this rails server:
 
-* Database initialization
+### Install Ruby
 
-* How to run the test suite
+Install RVM
+```
+\curl -sSL https://get.rvm.io | bash -s stable
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Install Ruby by RVM
+```
+rvm install 2.4.1
+rvm --default use 2.4.1
+```
 
-* Deployment instructions
+### Clone this repository
+```
+git clone https://github.com/meowmeowfish/meowmeowfish-web
+cd meowmewofish-web/
+```
 
-* ...
+### Install rails and necessary gems
+```
+bundle install
+```
+
+### Start rails server
+```
+rails s
+```
+
+### Let others can connect to your local server using Ngrok (optional)
+
+Download ngork from https://ngrok.com/download.
+
+then start ngork:
+```
+./ngork http 3000
+```
+
+It should print a URL on your terminal, looks like this: http://384ebc1b.ngrok.io/
+
+Then others can connect to your server by that URL.
+
